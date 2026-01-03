@@ -13,8 +13,7 @@ public class BlockService {
     }
 
     public boolean isBlocked(String userId) {
-        Boolean res = redisTemplate.opsForSet()
-                .isMember("blocked_users", userId);
-        return Boolean.TRUE.equals(res);
+        String key = "blocked:" + userId;
+        return Boolean.TRUE.equals(redisTemplate.hasKey(key));
     }
 }
